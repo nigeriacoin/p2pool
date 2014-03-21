@@ -122,7 +122,25 @@ nets = dict(
         VERSION_CHECK=lambda v: True,
         VERSION_WARNING=lambda v: 'Upgrade Terracoin to >= 0.8.0.1!' if v < 80001 else None,
     ),
-
+    nigeriacoin=math.Object(
+        PARENT=networks.nets['nigeriacoin'],
+        SHARE_PERIOD=12, # seconds
+        CHAIN_LENGTH=24*60*60//12, # shares
+        REAL_CHAIN_LENGTH=24*60*60//12, # shares
+        TARGET_LOOKBEHIND=200, # shares
+        SPREAD=15, # blocks
+        IDENTIFIER='9323e43a6805a417'.decode('hex'),
+        PREFIX='af69020acd611ac0'.decode('hex'),
+        P2P_PORT=9557,
+        MIN_TARGET=16,
+        MAX_TARGET=2**256//2**32 - 1,
+        PERSIST=True,
+        WORKER_PORT=9556,
+        BOOTSTRAP_ADDRS='p2pool1.nigeriacoin.org p2pool2.nigeriacoin.org'.split(' '),
+        ANNOUNCE_CHANNEL='#p2pool-ngc',
+        VERSION_CHECK=lambda v: v >= 90000,
+        VERSION_WARNING=lambda v: 'Upgrade Nigeriacoin to >=0.9.0!' if v < 90000 else None,
+    )
 )
 for net_name, net in nets.iteritems():
     net.NAME = net_name

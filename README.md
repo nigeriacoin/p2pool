@@ -1,7 +1,7 @@
 Requirements:
 -------------------------
 Generic:
-* Bitcoin >=0.8.5
+* Nigeriacoin >=0.9.0
 * Python >=2.6
 * Twisted >=10.0.0
 * python-argparse (for Python =2.6)
@@ -43,20 +43,21 @@ Official wiki :
 -------------------------
 https://en.bitcoin.it/wiki/P2Pool
 
-Alternate web front end :
+Alternate web front ends :
 -------------------------
 * https://github.com/hardcpp/P2PoolExtendedFrontEnd
+* https://github.com/johndoe75/p2pool-node-status
 
-Notes for Litecoin:
+Notes for Nigeriacoin:
 =========================
 Requirements:
 -------------------------
-In order to run P2Pool with the Litecoin network, you would need to build and install the
-ltc_scrypt module that includes the scrypt proof of work code that Litecoin uses for hashes.
+In order to run P2Pool with the Nigeriacoin network, you will need to build and install the
+skeinhash module that includes the skein proof of work code that Nigeriacoin uses for hashes.
 
 Linux:
 
-    cd litecoin_scrypt
+    cd skeinhash
     sudo python setup.py install
 
 Windows (mingw):
@@ -65,8 +66,10 @@ Windows (mingw):
 
 In bash type this:
 
-    cd litecoin_scrypt
+    cd skeinhash
     C:\Python27\python.exe setup.py build --compile=mingw32 install
+
+Make sure to use a 32 bit version of python if you decide to use the mingw32 route, or the module will not work.
 
 Windows (microsoft visual c++)
 * Open visual studio console
@@ -75,7 +78,7 @@ In bash type this:
 
     SET VS90COMNTOOLS=%VS110COMNTOOLS%	           # For visual c++ 2012
     SET VS90COMNTOOLS=%VS100COMNTOOLS%             # For visual c++ 2010
-    cd litecoin_scrypt
+    cd skeinhash
     C:\Python27\python.exe setup.py build --compile=mingw32 install
 	
 If you run into an error with unrecognized command line option '-mno-cygwin', see this:
@@ -83,16 +86,10 @@ http://stackoverflow.com/questions/6034390/compiling-with-cython-and-mingw-produ
 
 Running P2Pool:
 -------------------------
-Run P2Pool with the "--net litecoin" option.
-Run your miner program, connecting to 127.0.0.1 on port 9327.
-Forward port 9338 to the host running P2Pool.
+Run P2Pool with the "--net nigeriacoin" option.
+Run your miner program, connecting to 127.0.0.1 on port 9556.
+Forward port 9557 to the host running P2Pool.
 
-Litecoin's use of ports 9332 and 9332 conflicts with P2Pool running on
-the Bitcoin network. To avoid problems, add these lines to litecoin.conf
-and restart litecoind:
-
-    rpcport=10332
-    port=10333
 
 Sponsors:
 -------------------------
