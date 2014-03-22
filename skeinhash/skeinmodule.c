@@ -22,7 +22,7 @@ static PyObject *skein_gethash(PyObject *self, PyObject *args)
 }
 
 static PyMethodDef SkeinMethods[] = {
-    { "gethash", skein_gethash, METH_VARARGS, "Returns a proof of work hash using skein and sha256" },
+    { "getPoWHash", skein_gethash, METH_VARARGS, "Returns a proof of work hash using skein and sha256" },
     { NULL, NULL, 0, NULL }
 };
 
