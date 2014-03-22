@@ -197,7 +197,7 @@ nets = dict(
             (yield bitcoind.rpc_getinfo())['testnet']
         )),
         SUBSIDY_FUNC=lambda height: 41900*100000000,
-        POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('skeinhash').getPowHash(data)),
+        POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('skeinhash').getPoWHash(data)),
         BLOCK_PERIOD=120, # s
         SYMBOL='NGC',
         CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'Nigeriacoin') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/Nigeriacoin/') if platform.system() == 'Darwin' else os.path.expanduser('~/.nigeriacoin'), 'nigeriacoin.conf'),
