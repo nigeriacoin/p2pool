@@ -193,8 +193,8 @@ nets = dict(
         ADDRESS_VERSION=53,
         RPC_PORT=3556,
         RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
-            'nigeriacoinaddress' in (yield bitcoind.rpc_help()) and
-            (yield bitcoind.rpc_getinfo())['testnet']
+            "nigeriacoinaddress" in (yield bitcoind.rpc_help()) and
+            not (yield bitcoind.rpc_getinfo())['testnet']
         )),
         SUBSIDY_FUNC=lambda height: 41900*100000000,
         POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('skeinhash').getPoWHash(data)),
