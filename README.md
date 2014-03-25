@@ -1,3 +1,5 @@
+##This does not yet work with Nigeriacoin nor Skeincoin
+
 Requirements:
 -------------------------
 Generic:
