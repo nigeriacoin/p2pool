@@ -157,7 +157,7 @@ nets = dict(
         WORKER_PORT=18230,
         BOOTSTRAP_ADDRS=''.split(' '),
         ANNOUNCE_CHANNEL='#p2pool-skc',
-        VERSION_CHECK=lambda v: v >= 90000,
+        VERSION_CHECK=lambda v: v >= 80600,
         VERSION_WARNING=lambda v: 'Upgrade Skeincoin to >=0.8.6!' if v < 80600 else None,
     )
 )
