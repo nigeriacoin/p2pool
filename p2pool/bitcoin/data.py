@@ -3,12 +3,16 @@ from __future__ import division
 import hashlib
 import random
 import warnings
+import skeinhash
 
 import p2pool
 from p2pool.util import math, pack
 
 def hash256(data):
     return pack.IntType(256).unpack(hashlib.sha256(hashlib.sha256(data).digest()).digest())
+
+def skeinhash256(data):
+    return pack.IntType(256).unpack(skeinhash.getPoWHash(data))
 
 def hash160(data):
     if data == '04ffd03de44a6e11b9917f3a29f9443283d9871c9d743ef30d5eddcd37094b64d1b3d8090496b53256786bf5c82932ec23c3b74d9f05a6f95a8b5529352656664b'.decode('hex'):

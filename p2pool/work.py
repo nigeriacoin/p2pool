@@ -5,6 +5,7 @@ import random
 import re
 import sys
 import time
+import skeinhash
 
 from twisted.internet import defer
 from twisted.python import log
@@ -90,7 +91,7 @@ class WorkerBridge(worker_interface.WorkerBridge):
             bb = self.node.best_block_header.value
             if bb is not None and bb['previous_block'] == t['previous_block'] and self.node.net.PARENT.POW_FUNC(bitcoin_data.block_header_type.pack(bb)) <= t['bits'].target:
                 print 'Skipping from block %x to block %x!' % (bb['previous_block'],
-                    bitcoin_data.hash256(bitcoin_data.block_header_type.pack(bb)))
+                    bitcoin_data.skeinhash256(bitcoin_data.block_header_type.pack(bb)))
                 t = dict(
                     version=bb['version'],
                     previous_block=bitcoin_data.hash256(bitcoin_data.block_header_type.pack(bb)),
@@ -346,8 +347,8 @@ class WorkerBridge(worker_interface.WorkerBridge):
             new_packed_gentx = packed_gentx[:-self.COINBASE_NONCE_LENGTH-4] + coinbase_nonce + packed_gentx[-4:] if coinbase_nonce != '\0'*self.COINBASE_NONCE_LENGTH else packed_gentx
             new_gentx = bitcoin_data.tx_type.unpack(new_packed_gentx) if coinbase_nonce != '\0'*self.COINBASE_NONCE_LENGTH else gentx
             
-            header_hash = bitcoin_data.hash256(bitcoin_data.block_header_type.pack(header))
             pow_hash = self.node.net.PARENT.POW_FUNC(bitcoin_data.block_header_type.pack(header))
+            header_hash = pow_hash
             try:
                 if pow_hash <= header['bits'].target or p2pool.DEBUG:
                     helper.submit_block(dict(header=header, txs=[new_gentx] + other_transactions), False, self.node.factory, self.node.bitcoind, self.node.bitcoind_work, self.node.net)

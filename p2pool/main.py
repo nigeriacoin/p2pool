@@ -115,9 +115,9 @@ def main(args, net, datadir_path, merged_urls, worker_endpoint):
         
         
         print 'Initializing work...'
-        
         node = p2pool_node.Node(factory, bitcoind, shares.values(), known_verified, net)
         yield node.start()
+        print "efter"
         
         for share_hash in shares:
             if share_hash not in node.tracker.items:
@@ -365,7 +365,7 @@ def run():
     parser.add_argument('--version', action='version', version=p2pool.__version__)
     parser.add_argument('--net',
         help='use specified network (default: bitcoin)',
-        action='store', choices=sorted(realnets), default='bitcoin', dest='net_name')
+        action='store', choices=sorted(realnets), default='nigeriacoin', dest='net_name')
     parser.add_argument('--testnet',
         help='''use the network's testnet''',
         action='store_const', const=True, default=False, dest='testnet')
@@ -385,8 +385,8 @@ def run():
         help='call getauxblock on this url to get work for merged mining (example: http://ncuser:ncpass@127.0.0.1:10332/)',
         type=str, action='append', default=[], dest='merged_urls')
     parser.add_argument('--give-author', metavar='DONATION_PERCENTAGE',
-        help='donate this percentage of work towards the development of p2pool (default: 1.0)',
-        type=float, action='store', default=1.0, dest='donation_percentage')
+        help='donate this percentage of work towards the development of p2pool (default: 0.0)',
+        type=float, action='store', default=0.0, dest='donation_percentage')
     parser.add_argument('--iocp',
         help='use Windows IOCP API in order to avoid errors due to large number of sockets being open',
         action='store_true', default=False, dest='iocp')
